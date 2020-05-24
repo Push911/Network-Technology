@@ -93,7 +93,7 @@ class Machine:
         elif self.sent > 0:
             return
         elif self.wait == 0:
-            if self.empty and random() < 0.01:
+            if self.empty and random() < 0.1:
                 self.push(self.message)
                 self.remove = packetSize - 1
                 self.sent = 1

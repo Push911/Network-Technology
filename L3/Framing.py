@@ -23,7 +23,7 @@ def unstuff(data):
         if countOne == 5:
             countOne = 0
             if number != "0":
-                print("Error while stuffing")
+                print("Error while unstuffing")
                 return None
         else:
             if number == "1":
@@ -35,25 +35,26 @@ def unstuff(data):
 
 
 def framing(data):
-    code = "01010101"
-    crc = stuff(bin(crc32(data.encode()))[2:].zfill(32))
-    output = stuff(data)
-    return code + output + crc + code
+    code = "01111110"
+    crc = bin(crc32(data.encode()))[2:].zfill(32)
+    output = stuff(data+crc)
+    print(output)
+    return code + output + code
 
 
 def unframing(data):
-    code = "01010101"
+    code = "01111110"
     head = data[:8]
     tail = data[-8:]
     codedString = data[8:-40]
     crc = data[-40:-8]
-    data = unstuff(codedString)
-    crc1 = bin(crc32(data.encode()))[2:].zfill(32)
+    data = unstuff(codedString+crc)
 
+    crc1 = bin(crc32(data.encode()))[2:].zfill(32)
     if head != code or tail != code or crc != crc1:
         print("Please enter the right file to decode")
 
-    return data
+    return data[:-32]
 
 
 def encode(data, outputFile):
