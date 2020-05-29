@@ -1,0 +1,18 @@
+conf t
+int f0/0
+ip add 192.168.3.4 255.255.255.0
+no shut
+exit
+version 2
+no auto-summary
+network 192.168.0.0
+network 192.168.1.0
+network 192.168.2.0
+network 192.168.3.0
+network 192.168.4.0
+exit
+ip domain-lookup 
+ip name-server 8.8.8.8
+ip route 0.0.0.0 0.0.0.0 192.168.0.1
+end
+

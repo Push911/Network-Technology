@@ -1,0 +1,2 @@
+ip 192.168.1.2/24 192.168.1.1               1.comp name 2.node to comp
+ip dns 8.8.8.8

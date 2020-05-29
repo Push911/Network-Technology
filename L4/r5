@@ -1,0 +1,30 @@
+conf t
+int f0/0
+ip add dhcp
+ip nat outside
+no shut
+end
+conf t
+router rip
+version 2
+no auto-summary
+network 192.168.0.0
+network 192.168.1.0
+network 192.168.2.0
+network 192.168.3.0
+network 192.168.4.0
+end
+conf t 
+ip nat inside source list 1 interface fastEthernet 0/0 overload
+access-list 1 permit any
+ip domain-lookup 
+ip name-server 8.8.8.8
+end
+
+
+conf t
+int f0/1
+no shut
+ip add 192.168.0.1 255.255.255.0 
+ip nat inside
+end

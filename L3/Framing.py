@@ -38,7 +38,6 @@ def framing(data):
     code = "01111110"
     crc = bin(crc32(data.encode()))[2:].zfill(32)
     output = stuff(data+crc)
-    print(output)
     return code + output + code
 
 
